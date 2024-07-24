@@ -1,28 +1,41 @@
 import React, { useState } from "react";
 import SignupImage from "../assets/signupimage.png";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
-  let [email, setEmail] = useState(" ");
+  let [email, setEmail] = useState("");
   let [name, setName] = useState("");
   let [pass, setPass] = useState("");
-  // let [submit, setsubmit] = useState()f;
+  let [emailerr, setEmailerr] = useState("");
+  let [nameerr, setNameerr] = useState("");
+  let [passerr, setPasserr] = useState("");
+  let [passwordshow, setPasswordshow] = useState(false);
 
   let handlemail = (e) => {
     setEmail(e.target.value);
+    setEmailerr("");
   };
 
   let handlename = (e) => {
     setName(e.target.value);
+    setNameerr("");
   };
   let handlepass = (e) => {
     setPass(e.target.value);
-    console.log(e.target.value);
+    setPasserr("");
   };
 
-  console.log(pass);
-
   let handleSubmit = () => {
-    console.log(email, pass);
+    if (!email) {
+      setEmailerr("Email is required");
+    }
+    if (!name) {
+      setNameerr("Name is required");
+    }
+    if (!pass) {
+      setPasserr("Password is required");
+    }
   };
 
   return (
@@ -42,10 +55,13 @@ const Signup = () => {
                 className="pl-8 w-[365px] h-[50px] border-[1px] border-[#11175D] border-opacity-[30%] rounded-lg"
                 type="text"
                 placeholder="Enter you email"
+                value={email}
               />
-              <p className="absolute top-[-9px] left-5 bg-white px-3 text-[13px]">
+              {emailerr && <p className="text-red-700">{emailerr}</p>}
+
+              <label className="absolute top-[-9px] left-5 bg-white px-3 text-[13px]">
                 Email Adress
-              </p>
+              </label>
             </div>
             <div className="relative mt-10">
               <input
@@ -54,16 +70,32 @@ const Signup = () => {
                 type="text"
                 placeholder="Enter you name"
               />
+              {nameerr && <p className="text-red-700">{nameerr}</p>}
               <p className="absolute top-[-9px] left-5 bg-white px-3 text-[13px]">
                 Full Name
               </p>
             </div>
             <div className="relative mt-10">
+              {passwordshow ? (
+                <IoIosEye
+                  onClick={() => setPasswordshow(false)}
+                  className=" absolute top-2/4 translate-y-[-50%] right-5 text-2xl cursor-pointer"
+                />
+              ) : (
+                <IoIosEyeOff
+                  onClick={() => setPasswordshow(true)}
+                  className=" absolute top-2/4 translate-y-[-50%] right-5 text-2xl cursor-pointer"
+                />
+              )}
+
               <input
+                onChange={handlepass}
                 className="pl-8 w-[365px] h-[50px] border-[1px] border-[#11175D] border-opacity-[30%] rounded-lg"
-                type="password"
-                placeholder="Enter you email"
+                type={passwordshow ? "text" : "password"}
+                placeholder="Enter your password"
               />
+
+              {passerr && <p className="text-red-700">{passerr}</p>}
               <p className="absolute top-[-9px] left-5 bg-white px-3 text-[13px]">
                 Password
               </p>
@@ -75,13 +107,13 @@ const Signup = () => {
               Sign Up
             </button>
             <p className="text-center mt-5 ">
-              Already Have an Account ?{" "}
-              <span
-                className="text-yellow-600 font-bold cursor-pointer
-          "
+              Already Have an Account ?
+              <Link
+                to="./Signin"
+                className="text-yellow-600 font-bold cursor-pointer ml-1"
               >
                 login
-              </span>
+              </Link>
             </p>
           </div>
         </div>
