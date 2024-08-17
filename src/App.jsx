@@ -8,15 +8,20 @@ import {
 } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/signup",
     element: <Signup />,
   },
   {
     path: "/signin",
     element: <Signin />,
+  },
+  {
+    path: "/",
+    element: <Home/>,
   },
 ]);
 

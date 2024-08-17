@@ -75,22 +75,11 @@ const Signup = () => {
                 Full Name
               </p>
             </div>
-            <div className="relative mt-10">
-              {passwordshow ? (
-                <IoIosEye
-                  onClick={() => setPasswordshow(false)}
-                  className=" absolute top-2/4 translate-y-[-50%] right-5 text-2xl cursor-pointer"
-                />
-              ) : (
-                <IoIosEyeOff
-                  onClick={() => setPasswordshow(true)}
-                  className=" absolute top-2/4 translate-y-[-50%] right-5 text-2xl cursor-pointer"
-                />
-              )}
-
+            <div className="relative mt-10 w-[365px]">
+              
               <input
                 onChange={handlepass}
-                className="pl-8 w-[365px] h-[50px] border-[1px] border-[#11175D] border-opacity-[30%] rounded-lg"
+                className=" pr-12 pl-8 w-[365px] h-[50px] border-[1px] border-[#11175D] border-opacity-[30%] rounded-lg"
                 type={passwordshow ? "text" : "password"}
                 placeholder="Enter your password"
               />
@@ -99,6 +88,20 @@ const Signup = () => {
               <p className="absolute top-[-9px] left-5 bg-white px-3 text-[13px]">
                 Password
               </p>
+              <div className="absolute w-[100%] text-red-900 top-2/4 translate-y-[-50%] "> 
+              {passwordshow ? (
+                <IoIosEye
+                  onClick={() => setPasswordshow(false)}
+                  className=" absolute right-3 text-2xl cursor-pointer  top-2/4 translate-y-[-50%] "
+                />
+              ) : (
+                <IoIosEyeOff
+                  onClick={() => setPasswordshow(true)}
+                  className=" absolute right-3 text-2xl cursor-pointer  top-2/4 translate-y-[-50%] "
+                />
+              )}
+              </div>
+
             </div>
             <button
               onClick={handleSubmit}
